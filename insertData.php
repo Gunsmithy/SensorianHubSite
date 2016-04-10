@@ -1,26 +1,28 @@
+<!--check for the db connection-->
 <?php include 'dbconnect.php' ?>
-
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-session_start();
-$user_id=10;
+//check for the post method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //get the json data from th pi
   $json_obj = file_get_contents("php://input");
+  //decode the json data
   $arr = json_decode($json_obj,true);
-
+  //parse the json data
   $hid= $arr["HW"];
   $ip = $arr["IP"];
   $cpu= $arr["CPU"];
   $lux = $arr["LUX"];
   $temp = $arr["Temp"];
-  $press= $arr["Press"];
+  $press1= $arr["Press"];
   $ts= $arr["TS"];
   $x=$arr["X"];
   $y=$arr["Y"];
   $z=$arr["Z"];
+  $press2= 100-(float)$press1;
+  $press = sprintf("%.3f", $press2);
+  //enter the data into the db
+  //check if the data is valid bu checking thr hardware id for the user in user table
+  // it will get the user id too
   $sql= "SELECT id FROM users WHERE  hardwareId='$hid'";
   if($query_run = mysqli_query($conn, $sql))
   {
@@ -37,13 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    }
  }
- $insert_row = $conn->query("INSERT INTO data (id,temp_p,ip,cpuTemp,lux,temp,press,acc_x,acc_y,acc_z) 
+ //insert the data into table
+ $insert_row = $conn->query("INSERT INTO data (id,time_p,ip,cpuTemp,lux,temp,press,acc_x,acc_y,acc_z) 
   VALUES ('$user_id', '$ts','$ip', '$cpu', '$lux', '$temp','$press','$x','$y','$z')");
  if($insert_row){
-  echo "Registration Successful...Welcome to App";
+  echo "Value received and stored";
 }else{
-  echo "Please Try Again...";
-}
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}$conn->close();
 
 
 }

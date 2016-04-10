@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//get all the data for the cpu temp
 require 'dbconnect.php';
 $user_id =  $_POST["uid"];
 $sql_query = "SELECT cpuTemp,time_p FROM data where id like '$user_id'ORDER BY time_p DESC;";         

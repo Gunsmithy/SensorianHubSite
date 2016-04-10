@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//get recent 1 data from the db
 require 'dbconnect.php';
 $user_id =  $_POST["uid"];
 $sql_query = "SELECT cpuTemp,time_p FROM data where id like '$user_id'ORDER BY time_p DESC;";         
@@ -12,7 +10,6 @@ $result = mysqli_query($conn,$sql_query);
  while($row = mysqli_fetch_assoc($result) )  {
  	$output [] = $row ; 
  }
-
  echo json_encode($output);
  }  
  else  

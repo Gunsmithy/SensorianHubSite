@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//recent 10 record from the db
 require 'dbconnect.php';
 $user_id =  $_POST["uid"];
 $sql_query = "SELECT * FROM data WHERE id like '$user_id'ORDER BY time_p DESC  LIMIT 10;";         

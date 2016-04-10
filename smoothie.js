@@ -71,7 +71,7 @@
  *        Draw time labels on top of series, by @comolosabia
  *        Add TimeSeries.clear function, by @drewnoakes
  */
-
+//smoothie chart library
 ;(function(exports) {
 
   var Util = {

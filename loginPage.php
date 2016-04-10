@@ -1,21 +1,19 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//session start
 ob_start();
 session_start();
 include("functions.php");
 require 'dbconnect.php';
       //checking login and session
-      
       $msg = '';
-
       if (isset($_POST['login']) && !empty($_POST['username']) 
        && !empty($_POST['password']))
       {
        $username1 = $_POST['username'];
        $password1 = $_POST['password'];
+       //convert the password to md5
        $password2 = md5($password1);
+       //check if the user and password in the db
        $sql= "SELECT * FROM users WHERE userName='$username1' AND password='$password2'";
        if($query_run = mysqli_query($conn, $sql))
        {
@@ -28,15 +26,13 @@ require 'dbconnect.php';
          $row = mysqli_fetch_assoc($query_run);
          $user_id =  $row['id'];
          $name=$row['Name'];
-          //creating session
-         
+          //creating session         
          $_SESSION['loggedin_time'] = time();
          $_SESSION['userid'] = $user_id;
          $_SESSION['name'] = $name;
-
        }
      }
-      else {
+      else {//set the meassage for the user
            $msg = '*Wrong username or password';
          }
     }
@@ -48,14 +44,11 @@ require 'dbconnect.php';
       
       header("Location:logout.php?session_expired=1");
     }
-  }
-
+  }//check if the user session is expired
   if(isset($_GET["session_expired"])) {
     $msg = "Login Session is Expired. Please Login Again";
   }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

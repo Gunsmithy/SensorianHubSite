@@ -1,4 +1,6 @@
 <?php
+//session started
+//logot for the website
 session_start();
 unset($_SESSION["userid"]);
 unset($_SESSION["name"]);

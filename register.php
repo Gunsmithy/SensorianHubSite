@@ -1,5 +1,5 @@
 <?php include 'dbconnect.php' ?>
-
+<!--Connect to db and register new user for the website-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -56,6 +56,7 @@
                         <div class="panel-body">
                             <form role="form" method="post">
                                 <br/>
+                                <!--collect the new user data-->
                                 <div class="form-group input-group">
                                     <span class="input-group-addon"><i class="fa fa-circle-o-notch"  ></i></span>
                                     <input type="text" class="form-control" placeholder="Your Name" name="fname"/>
