@@ -7,14 +7,14 @@ Currently written in PHP and MySQL, with plans to support other server platforms
 The site is very rudimentary, but demonstrates how the [Sensorian Hub Client](https://github.com/sensorian/SensorianHubClient) can easily integrate with other web services.  
 To deploy:  
 1. Setup a basic LAMP stack on a server of your choosing  
-2. Add the website files to a directory in the Apache html directory, typically `/var/www/`  
+2. Add the website files to a directory in the Apache html directory, typically `/var/www/SensorianHubSite`  
 2. Login to your mysql server using `mysql --user=USER --password=PASSWORD`  
 3. Create a new database with the name of your choice using `CREATE DATABASE DATABASE_NAME;` and `exit;`  
 4a. Import the two SQL dumps to that database to create the necessary tables:  
 4b. `mysql --user=USER --password=PASSWORD DATABASE_NAME < users_dump.sql`  
 4c. `mysql --user=USER --password=PASSWORD DATABASE_NAME < data_dump.sql`  
 5. Modify the `dbconnect-example.php` with your MySQL credentials and save as `dbconnect.php`  
-6. Browse to `http://your_server_address/FOLDER_NAME/register.php` to create a login and begin!  
+6. Browse to `http://your_server_address/SensorianHubSite/register.php` to create a login and begin!  
 6b. The Hardware Id on this page is referring the the CPU serial of your Raspberry Pi.  
 
 Attached below are Saurabh's additions to the readme file  
