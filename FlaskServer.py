@@ -10,13 +10,16 @@ app = Flask(__name__)
 api = Api(app)
 auth = HTTPBasicAuth()
 
+configUsername = "defaultUsername"
+configPassword = "defaultPassword"
+
 variable_queue = []
 variableQueueLock = threading.Lock()
 
 @auth.get_password
 def get_password(username):
-    if username == 'dylan':
-        return 'dylanrestpass'
+    if username == configUsername:
+        return configPassword
     return None
 
 
@@ -68,9 +71,8 @@ def shutdown_flask_api():
 
 def kill_flask():
     url = 'http://127.0.0.1:5001/shutdown'
-    headers = {'Authorization': 'Basic ZHlsYW46ZHlsYW5yZXN0cGFzcw=='}
     try:
-        requests.post(url, headers=headers)
+        requests.post(url, auth=(configUsername, configPassword))
     except requests.exceptions.ConnectionError:
         print("Flask server already shut down")
 
