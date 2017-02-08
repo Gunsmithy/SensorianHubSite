@@ -1,8 +1,9 @@
 <?php
+// Change credentials to that of your MySQL Database
 $servername = "localhost";
 $username = "root";
-$password = "1234sm";
-$dbname = "RaspberryPiProject";
+$password = "password";
+$dbname = "SensorianHubSiteDB";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password,$dbname);
@@ -11,5 +12,4 @@ $conn = new mysqli($servername, $username, $password,$dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
 ?>
