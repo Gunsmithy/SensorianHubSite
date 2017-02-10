@@ -2,6 +2,7 @@
 sudo docker network create --subnet=172.20.0.0/16 SensorianNet
 cd mysql_database
 chmod +x docker_mysql.sh
+chmod +x import.sh
 ./docker_mysql.sh
 cd ..
 cd php_site
