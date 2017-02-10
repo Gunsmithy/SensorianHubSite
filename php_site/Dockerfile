@@ -8,7 +8,7 @@ MAINTAINER dylan.kauling@uoit.net
 COPY public_html/ /var/www/html/
 
 # Install the MySQL extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql mysql mysqli
 
 # Expose port 80 for HTTP and 443 for HTTPS traffic
 EXPOSE 80 443
