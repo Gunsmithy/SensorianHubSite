@@ -4,5 +4,5 @@ sed -e 's/"example_password"/"sensorian_user_password"/g' public_html/dbconnect-
 # Build the site container
 sudo docker build -t "sensorianhub_site" .
 
-# Start container without proxy on port 8080 (If unused)
-sudo docker run -d -p 8080:80 --name SensorianHub_Site --network=SensorianNet --ip=172.20.0.20 sensorianhub_site:latest
+# Start container without proxy on port 80 (If unused)
+sudo docker run -d -p 80:80 --name SensorianHub_Site --network=SensorianNet --ip=172.20.0.20 sensorianhub_site:latest
