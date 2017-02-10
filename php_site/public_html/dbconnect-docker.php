@@ -1,6 +1,6 @@
 <?php
 // Change credentials to that of your MySQL Database
-$servername = "172.20.0.2";
+$servername = "172.20.0.3";
 $username = "Sensorian";
 $password = "example_password";
 $dbname = "SensorianHubSiteDB";
