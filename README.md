@@ -2,20 +2,32 @@
 Website to receive, store, and view data gathered from Sensorian Shield devices  
 Course project for SOFE 4870U - Special Topics: Cloud Computing 2016  
 
-Code originally written by my partner, from whom I've taken on the task of maintaining it  
+Code originally written by my partner, from whom I've taken on the task of maintaining and improving it  
 Currently written in PHP and MySQL, with plans to support other server platforms in the future  
-The site is very rudimentary, but demonstrates how the [Sensorian Hub Client](https://github.com/sensorian/SensorianHubClient) can easily integrate with other web services.  
-To deploy:  
-1. Setup a basic LAMP stack on a server of your choosing  
-2. Add the website files to a directory in the Apache html directory, typically `/var/www/SensorianHubSite`  
-2. Login to your mysql server using `mysql --user=USER --password=PASSWORD`  
-3. Create a new database with the name of your choice using `CREATE DATABASE DATABASE_NAME;` and `exit;`  
-4a. Import the two SQL dumps to that database to create the necessary tables:  
-4b. `mysql --user=USER --password=PASSWORD DATABASE_NAME < users_dump.sql`  
-4c. `mysql --user=USER --password=PASSWORD DATABASE_NAME < data_dump.sql`  
-5. Modify the `dbconnect-example.php` with your MySQL credentials and save as `dbconnect.php`  
-6. Browse to `http://your_server_address/SensorianHubSite/register.php` to create a login and begin!  
+The site is very rudimentary at this time, but demonstrates how the [Sensorian Hub Client](https://github.com/sensorian/SensorianHubClient) can easily integrate with other web services.  
+
+To deploy with Docker:  
+1. Setup Docker on a server of your choosing  
+2. Change `sensorian_user_password` in `php_site/site.sh` to a password of your choosing  
+3a. Change `sensorian_user_password` in `mysql_database/docker_mysql.sh` to the same as above 
+3b. Change `sensorian_root_password` in the same file to a secure root password for the MySQL server  
+4. Set the install script to be executable and run it with `chmod +x docker_all.sh && ./docker_all.sh`  
+5a. Change `sensorian_root_password` in `mysql_database/import.sh` to the same as above  
+5b. Import the necessary tables into the database with `chmod +x import.sh && ./import.sh`    
+6a. Browse to `http://your_server_address/register.php` to create a login and begin!  
 6b. The Hardware Id on this page is referring the the CPU serial of your Raspberry Pi.  
+
+To deploy manually:  
+1. Setup a basic LAMP stack on a server of your choosing  
+2. Add the website files under `php_site/public_html` to a directory in the Apache html directory, typically `/var/www/`  
+3. Login to your mysql server using `mysql --user=USER --password=PASSWORD`  
+4. Create a new database with the name of your choice using `CREATE DATABASE DATABASE_NAME;` and `exit;`  
+5a. Import the two SQL dumps to that database to create the necessary tables:  
+5b. `mysql --user=USER --password=PASSWORD DATABASE_NAME < users_dump.sql`  
+5c. `mysql --user=USER --password=PASSWORD DATABASE_NAME < data_dump.sql`  
+6. Modify the `dbconnect-example.php` with your MySQL credentials and save as `dbconnect.php`  
+7a. Browse to `http://your_server_address/register.php` to create a login and begin!  
+7b. The Hardware Id on this page is referring the the CPU serial of your Raspberry Pi.  
 
 Attached below are Saurabh's additions to the readme file  
 
