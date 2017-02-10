@@ -9,3 +9,7 @@ cd php_site
 chmod +x site_noproxy.sh
 ./site_noproxy.sh
 cd ..
+cd socket_server
+chmod +x start.sh
+./start.sh
+cd ..

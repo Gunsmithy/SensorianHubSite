@@ -147,7 +147,7 @@ class ThreadedServer(object):
 def main():
     flask_thread = FlaskThread()
     flask_thread.start()
-    ThreadedServer('', 8000).listen()
+    ThreadedServer('', 5002).listen()
 
 
 if __name__ == '__main__':
