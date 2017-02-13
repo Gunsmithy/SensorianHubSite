@@ -79,7 +79,7 @@
                                 </div> 
                                 <button class="btn btn-success " type = "submit" name = "register">Register</button>
                                 <hr />
-                                Already Registered ?  <a href="loginPage.php" >Login here</a>
+                                Already Registered ?  <a href="index.php" >Login here</a>
                             </form>
                         </div>
 
