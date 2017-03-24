@@ -1,4 +1,4 @@
-  <?php 
+<?php 
   //session is created here
   session_start();
   //check for the login expired

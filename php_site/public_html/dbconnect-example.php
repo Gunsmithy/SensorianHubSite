@@ -1,8 +1,8 @@
 <?php
 // Change credentials to that of your MySQL Database
 $servername = "localhost";
-$username = "root";
-$password = "password";
+$username = "Sensorian";
+$password = "example_password";
 $dbname = "SensorianHubSiteDB";
 
 // Create connection
