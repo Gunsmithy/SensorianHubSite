@@ -1,2 +1,3 @@
 #Ignore PHPStorm project files
 php_site/public_html/.idea
+php_site/public_html/dbconnect.php

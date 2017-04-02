@@ -11,7 +11,7 @@
   }
   //if the userid and name set in the session
   if($_SESSION['userid']=="" && $_SESSION['name']==""){
-    header("location: loginPage.php");
+    header("location: index.php");
   }
   //set the dbconnection
   require 'dbconnect.php';
@@ -48,53 +48,13 @@
     //call when the page is loaded
     $(function() {
         //check if the tab is active 
-        $( "#tabs" ).tabs({active:1});
-        //sets the interval for the ajax request
-        var timer = setInterval(function(){
-          $.ajax({//ajax called  
-          //call for the php file to run script on database                                     
-          url: 'allResult.php',
-          method:"POST",
-            data: ({uid:"<?php echo $userId?>"}),//php call for user id
-            dataType: 'json', //json data return                    
-            success: function(data)         
-            {
-              $("#tab-1-1").empty();//clear the id
-              //append the table title to the element
-              $("#tab-1-1").append("<tr><th>Time Stamp</th><th>IP</th><th>CPU TEMP</th><th>LUX</th><th>TEMP</th><th>ALTITUDE</th><th>PRESSURE</th><th>X</th><th>Y</th><th>Z</th></tr>");
-              //now we parse the json data 
-              for (var i=0; i<data.length; i++){
-                var date=  data[i].date;
-                var temp=  data[i].temp;
-                var time=  data[i].time_p; 
-                var cpu=data[i].cpuTemp;
-                var alt=data[i].alti;
-                var ip=  data[i].ip;
-                var lux=  data[i].lux;
-                var press=  data[i].press;
-                var acc_x=  data[i].acc_x;
-                var acc_y=  data[i].acc_y;
-                var acc_z=  data[i].acc_z;
-                //appends json data to the table
-                $("#tab-1-1").append("<tr><td>"+time+"</td><td>"+ip+"</td><td>"+cpu+"</td><td>"+lux+"</td><td>"+temp+"</td><td>"+alt+"</td><td>"+press+"</td><td>"+acc_x+"</td><td>"+acc_y+"</td><td>"+acc_z+"</td></tr>");
-              }
-            } ,
-            //check for the error in the parsing 
-            error : function(request,error) 
-            { 
-              alert ("No data in the Database. Please connect to Raspberry Pi.");
-              //clear the time interval
-              clearInterval(timer);
-            } 
-
-          });
-        },5000);
+        $( "#tabs" ).tabs({active:0});
         // check if the tab 1 is the active
         $("#tabs").on("tabsactivate", (event, ui) => {
           if (ui.newPanel.is("#tabs-1")){
            var timer1 =setInterval(function(){
             $.ajax({                                      
-              url: 'allResult.php',
+              url: 'allResult100.php',
               method:"POST",
               data: ({uid:"<?php echo $userId?>"}),
               dataType: 'json',                     
@@ -325,8 +285,8 @@
       <!--crate the tab for the page--> 
       <div id="tabs">
         <ul>
-          <li><a href="#tabs-0">Current Result(Last 10 Record)</a></li>
-          <li><a href="#tabs-1">Display All Result</a></li>
+          <li><a href="#tabs-0">Display Last 10 Records</a></li>
+          <li><a href="#tabs-1">Display Last 100 Records</a></li>
           <li><a href="#tabs-2">CPU Temp</a></li>
           <li><a href="#tabs-3">LUX</a></li>
           <li><a href="#tabs-4">Temp</a></li>
@@ -340,6 +300,10 @@
            <script type="text/javascript" >
           //show the graph and make the ajax call everyinterval to get the recent data
           //graph for tab 0
+          $( window ).resize(function() {
+              var y = $( window).width();
+              $('#mycanvas').attr('width', y-100 );
+          });
           $(function(){
             var line1 = new TimeSeries();
             var line2 = new TimeSeries();
@@ -429,6 +393,10 @@
             <canvas id="mycanvas1" width= "1700" height="300"></canvas>
             <!--graph for the tab -1-->
             <script type="text/javascript" >
+                $( window ).resize(function() {
+                    var y = $( window).width();
+                    $('#mycanvas1').attr('width', y-100 );
+                });
               $(function(){
                 var line1 = new TimeSeries();
                 var line2 = new TimeSeries();
@@ -506,6 +474,10 @@
              <!--graph for the tab -2-->
              <canvas id="mycanvas2" width= "1700" height="300"></canvas>
              <script type="text/javascript" >
+                 $( window ).resize(function() {
+                     var y = $( window).width();
+                     $('#mycanvas2').attr('width', y-100 );
+                 });
               $(function(){
                 var line2 = new TimeSeries();
                 var smoothie = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 250, verticalSections: 6 } });
@@ -542,6 +514,10 @@
              <!--graph for the tab -3-->
              <canvas id="mycanvas3" width= "1700" height="300"></canvas>
              <script type="text/javascript" >
+                 $( window ).resize(function() {
+                     var y = $( window).width();
+                     $('#mycanvas3').attr('width', y-100 );
+                 });
               $(function(){
                 var line2 = new TimeSeries();
                 var smoothie = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 250, verticalSections: 6 } });
@@ -578,6 +554,10 @@
              <!--graph for the tab -4-->
              <canvas id="mycanvas4" width= "1700" height="300"></canvas>
              <script type="text/javascript" >
+                 $( window ).resize(function() {
+                     var y = $( window).width();
+                     $('#mycanvas4').attr('width', y-100 );
+                 });
               $(function(){
                 var line2 = new TimeSeries();
                 var smoothie = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 250, verticalSections: 6 } });
@@ -613,6 +593,10 @@
             <p>
               <canvas id="mycanvas5" width= "1700" height="300"></canvas>
               <script type="text/javascript" >
+                  $( window ).resize(function() {
+                      var y = $( window).width();
+                      $('#mycanvas5').attr('width', y-100 );
+                  });
                 $(function(){
                   var line2 = new TimeSeries();
                   var smoothie = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 250, verticalSections: 6 } });
@@ -649,6 +633,10 @@
               <p>
                 <canvas id="mycanvas6" width= "1700" height="300"></canvas>
                 <script type="text/javascript" >
+                    $( window ).resize(function() {
+                        var y = $( window).width();
+                        $('#mycanvas6').attr('width', y-100 );
+                    });
                   $(function(){
                     var line2 = new TimeSeries();
                     var smoothie = new SmoothieChart({ grid: { strokeStyle: 'rgb(125, 0, 0)', fillStyle: 'rgb(60, 0, 0)', lineWidth: 1, millisPerLine: 250, verticalSections: 6 } });
